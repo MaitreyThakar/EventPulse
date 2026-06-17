@@ -172,3 +172,5 @@ EventPulse uses **Nodemailer** alongside **Ethereal Email** to simulate mail del
 <img width="1269" height="516" alt="image" src="https://github.com/user-attachments/assets/39fc162a-845f-4f1c-bd8a-6c5db193fe45" />
 <img width="1275" height="576" alt="image" src="https://github.com/user-attachments/assets/c18548a9-89d8-4607-b477-1158492ab889" />
 <img width="1241" height="910" alt="image" src="https://github.com/user-attachments/assets/2a7c3af5-e563-4fca-94f2-46813c4aa531" />
+https://drive.google.com/file/d/1XLC-TWum1TTziDEPkwXYh4dxcUl5yMIa/view?usp=sharing
+
