@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000;
 
 const JWT_SECRET  = 'eventpulse-super-secret-2026';
 const JWT_EXPIRES = '7d';
-const BASE_URL    = `http://localhost:${PORT}`;
+const BASE_URL    = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
 
 // ── Middleware ──
 app.use(express.json());
