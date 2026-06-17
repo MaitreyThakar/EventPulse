@@ -159,3 +159,16 @@ EventPulse uses **Nodemailer** alongside **Ethereal Email** to simulate mail del
 * **Frontend:** Vanilla HTML5, Custom CSS3, ES6 JavaScript, Three.js (3D graphics library)
 * **Authentication:** JSON Web Tokens (jsonwebtoken), bcryptjs (hashing)
 * **Mailing:** Nodemailer, Ethereal SMTP test account
+
+<img width="1920" height="999" alt="image" src="https://github.com/user-attachments/assets/f790d0b4-5e50-4fcc-a116-2ff20916d1ed" />
+<img width="1920" height="966" alt="image" src="https://github.com/user-attachments/assets/c046ebc6-c01d-473e-8865-3a1551783b68" />
+<img width="1920" height="961" alt="image" src="https://github.com/user-attachments/assets/74c44c45-c1f9-4b33-aaf4-bf8bd7cfd5d3" />
+<img width="1920" height="964" alt="image" src="https://github.com/user-attachments/assets/4436d397-8b1f-4161-9983-03d4e0ebde34" />
+<img width="1920" height="962" alt="image" src="https://github.com/user-attachments/assets/a198e66b-1519-4c31-b726-24bd7d4619a6" />
+<img width="1917" height="964" alt="image" src="https://github.com/user-attachments/assets/464d57f9-5f67-4dd4-a7ea-6fdac4d0a0c4" />
+<img width="1920" height="965" alt="image" src="https://github.com/user-attachments/assets/00e6ec7a-6fdc-4ca9-9bcc-94ecf760e578" />
+<img width="1920" height="962" alt="image" src="https://github.com/user-attachments/assets/b98f4f84-e8a9-48e8-be90-3d7dec103da6" />
+<img width="1275" height="784" alt="image" src="https://github.com/user-attachments/assets/3d651a98-67b9-4651-b478-c148d9fc60f6" />
+<img width="1269" height="516" alt="image" src="https://github.com/user-attachments/assets/39fc162a-845f-4f1c-bd8a-6c5db193fe45" />
+<img width="1275" height="576" alt="image" src="https://github.com/user-attachments/assets/c18548a9-89d8-4607-b477-1158492ab889" />
+<img width="1241" height="910" alt="image" src="https://github.com/user-attachments/assets/2a7c3af5-e563-4fca-94f2-46813c4aa531" />
