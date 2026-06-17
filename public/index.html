@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EventPulse — Event Feedback Management System</title>
+  <meta name="description" content="EventPulse collects and manages event feedback. Share your experience and help make events better." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home3d.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/>
+          </svg>
+        </div>
+        EventPulse
+      </a>
+      <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="view-feedback.html">Reviews</a></li>
+        <li><a href="charts.html">Analytics</a></li>
+        <li id="nav-auth-item"></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== 3D HERO ===== -->
+  <section class="hero-3d" id="hero">
+    <canvas id="hero-canvas"></canvas>
+
+    <div class="geo-shapes" aria-hidden="true">
+      <div class="geo geo-1"></div>
+      <div class="geo geo-2"></div>
+      <div class="geo geo-3"></div>
+      <div class="geo geo-4"></div>
+      <div class="geo geo-5"></div>
+      <div class="geo geo-6"></div>
+    </div>
+
+    <div class="glow-rings" aria-hidden="true">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+    </div>
+
+    <div class="hero-3d-content">
+      <h1 class="hero-title-3d" id="hero-title">
+        <span class="title-line-1">Make Every Event</span>
+        <span class="title-line-2">
+          <span class="text-3d" data-text="Unforgettable">Unforgettable</span>
+        </span>
+      </h1>
+
+      <p class="hero-desc-3d" id="hero-desc">
+        Capture real-time attendee feedback, uncover deep insights, and craft extraordinary
+        experiences. The most powerful event intelligence platform — built for organizers who care.
+      </p>
+
+      <div class="hero-cta-row" id="hero-cta">
+        <a href="feedback.html" class="btn-3d btn-3d-primary" id="cta-primary">
+          <span class="btn-3d-inner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Submit Feedback
+          </span>
+          <span class="btn-3d-glow"></span>
+        </a>
+        <a href="events.html" class="btn-3d btn-3d-secondary" id="cta-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Browse Events
+        </a>
+        <a href="view-feedback.html" class="btn-3d btn-3d-ghost" id="cta-ghost">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          View Reviews
+        </a>
+      </div>
+
+      <!-- Dynamic stats from DB -->
+      <div class="hero-live-stats" id="hero-live-stats">
+        <div class="live-stat">
+          <span class="live-stat-num" id="stat-feedback">—</span>
+          <span class="live-stat-label">Feedbacks</span>
+        </div>
+        <div class="live-stat-divider"></div>
+        <div class="live-stat">
+          <span class="live-stat-num" id="stat-events">—</span>
+          <span class="live-stat-label">Events</span>
+        </div>
+        <div class="live-stat-divider"></div>
+        <div class="live-stat">
+          <span class="live-stat-num" id="stat-members">—</span>
+          <span class="live-stat-label">Members</span>
+        </div>
+        <div class="live-stat-divider"></div>
+        <div class="live-stat">
+          <span class="live-stat-num" id="stat-rating">—</span>
+          <span class="live-stat-label">Avg Rating</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator" id="scroll-indicator">
+      <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+
+    <!-- Marquee -->
+    <div class="marquee-bar" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Tech Innovation Summit</span><span class="marquee-dot">✦</span>
+        <span>Neon Nights Music Festival</span><span class="marquee-dot">✦</span>
+        <span>UX Design Masterclass</span><span class="marquee-dot">✦</span>
+        <span>Startup Pitch Arena</span><span class="marquee-dot">✦</span>
+        <span>Modern Art Exhibition</span><span class="marquee-dot">✦</span>
+        <span>City Marathon Challenge</span><span class="marquee-dot">✦</span>
+        <span>Global Food & Wine Festival</span><span class="marquee-dot">✦</span>
+        <span>AI & Robotics Expo</span><span class="marquee-dot">✦</span>
+        <span>Climate Action Summit</span><span class="marquee-dot">✦</span>
+        <span>Blockchain & Web3 Conference</span><span class="marquee-dot">✦</span>
+        <span>Tech Innovation Summit</span><span class="marquee-dot">✦</span>
+        <span>Neon Nights Music Festival</span><span class="marquee-dot">✦</span>
+        <span>UX Design Masterclass</span><span class="marquee-dot">✦</span>
+        <span>Startup Pitch Arena</span><span class="marquee-dot">✦</span>
+        <span>Modern Art Exhibition</span><span class="marquee-dot">✦</span>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <section class="section" id="features">
+      <div class="section-header animate-in">
+        <div class="section-tag">✦ Why EventPulse</div>
+        <h2 class="section-title">Everything You Need for Better Events</h2>
+        <p class="section-subtitle">A complete feedback ecosystem designed to help organizers deliver exceptional experiences.</p>
+      </div>
+
+      <div class="features-grid-3d stagger-children">
+        <div class="feat-card-3d animate-in">
+          <div class="feat-card-glow"></div>
+          <div class="feat-icon-wrap feat-indigo">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3>Smart Feedback Collection</h3>
+          <p>Intuitive forms with star ratings, real-time validation and grouped event categories.</p>
+          <div class="feat-card-arrow">→</div>
+        </div>
+        <div class="feat-card-3d animate-in">
+          <div class="feat-card-glow"></div>
+          <div class="feat-icon-wrap feat-cyan">
+            <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3>Live Analytics</h3>
+          <p>Real-time stats pulled directly from the database — total reviews, avg rating, members.</p>
+          <div class="feat-card-arrow">→</div>
+        </div>
+        <div class="feat-card-3d animate-in">
+          <div class="feat-card-glow"></div>
+          <div class="feat-icon-wrap feat-pink">
+            <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3>Star Rating System</h3>
+          <p>Visual 5-star ratings let attendees express satisfaction instantly with beautiful hover effects.</p>
+          <div class="feat-card-arrow">→</div>
+        </div>
+        <div class="feat-card-3d animate-in">
+          <div class="feat-card-glow"></div>
+          <div class="feat-icon-wrap feat-violet">
+            <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>Secure Auth</h3>
+          <p>Bcrypt-hashed passwords, JWT tokens, and a beautiful sign in / sign up flow.</p>
+          <div class="feat-card-arrow">→</div>
+        </div>
+        <div class="feat-card-3d animate-in">
+          <div class="feat-card-glow"></div>
+          <div class="feat-icon-wrap feat-green">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3>Full-Stack Integration</h3>
+          <p>Node.js + Express + SQLite backend seamlessly connected to the modern frontend via REST APIs.</p>
+          <div class="feat-card-arrow">→</div>
+        </div>
+        <div class="feat-card-3d animate-in">
+          <div class="feat-card-glow"></div>
+          <div class="feat-icon-wrap feat-orange">
+            <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3>Filter & Search Reviews</h3>
+          <p>Find reviews by event, sort by rating or date, and search by keyword — powerful discovery.</p>
+          <div class="feat-card-arrow">→</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamic Stats Section -->
+    <section class="stats-3d-section" id="stats-section">
+      <div class="stats-3d-bg" aria-hidden="true">
+        <div class="stats-orb stats-orb-1"></div>
+        <div class="stats-orb stats-orb-2"></div>
+      </div>
+      <div class="stats-3d-inner">
+        <div class="stats-3d-grid">
+          <div class="stat-3d-card animate-in">
+            <div class="stat-3d-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="stat-3d-num" id="db-stat-members">—</div>
+            <div class="stat-3d-label">Registered Members</div>
+          </div>
+          <div class="stat-3d-card animate-in">
+            <div class="stat-3d-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="stat-3d-num" id="db-stat-events">—</div>
+            <div class="stat-3d-label">Events With Reviews</div>
+          </div>
+          <div class="stat-3d-card animate-in">
+            <div class="stat-3d-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="stat-3d-num" id="db-stat-rating">—</div>
+            <div class="stat-3d-label">Average Rating</div>
+          </div>
+          <div class="stat-3d-card animate-in">
+            <div class="stat-3d-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <div class="stat-3d-num" id="db-stat-feedback">—</div>
+            <div class="stat-3d-label">Feedback Submitted</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section" id="how-it-works">
+      <div class="section-header animate-in">
+        <div class="section-tag">✦ How It Works</div>
+        <h2 class="section-title">Three Simple Steps</h2>
+        <p class="section-subtitle">From event selection to insight generation — feedback made effortless.</p>
+      </div>
+      <div class="steps-timeline">
+        <div class="step-item animate-in">
+          <div class="step-number">01</div>
+          <div class="step-connector"></div>
+          <div class="step-content">
+            <div class="step-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <h3>Choose an Event</h3>
+            <p>Browse our curated list of 12+ past events and select the one you attended.</p>
+          </div>
+        </div>
+        <div class="step-item animate-in">
+          <div class="step-number">02</div>
+          <div class="step-connector"></div>
+          <div class="step-content">
+            <div class="step-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <h3>Share Your Thoughts</h3>
+            <p>Fill out a quick feedback form with your star rating, comments and suggestions.</p>
+          </div>
+        </div>
+        <div class="step-item animate-in">
+          <div class="step-number">03</div>
+          <div class="step-content">
+            <div class="step-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <h3>Drive Improvement</h3>
+            <p>Your feedback is stored in SQLite and shown live to help organizers improve future events.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials-section" id="testimonials">
+      <div class="section-header animate-in">
+        <div class="section-tag">✦ Testimonials</div>
+        <h2 class="section-title">What Attendees Say</h2>
+        <p class="section-subtitle">Real reviews from real event-goers who shaped better experiences.</p>
+      </div>
+      <div class="testimonials-carousel" id="testimonials-carousel">
+        <div class="testimonial-track" id="testimonial-track">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"EventPulse made it so easy to share my thoughts after the Tech Summit. The form was clean and I got confirmation instantly. Love it!"</p>
+            <div class="testimonial-author">
+              <div class="t-avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">JD</div>
+              <div><div class="t-name">James Davidson</div><div class="t-event">Tech Innovation Summit</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"The filter feature on the reviews page is genius. I could instantly see all feedback for our music festival — super useful for planning next year."</p>
+            <div class="testimonial-author">
+              <div class="t-avatar" style="background:linear-gradient(135deg,#f472b6,#8b5cf6);">SM</div>
+              <div><div class="t-name">Sofia Martinez</div><div class="t-event">Neon Nights Music Festival</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★☆</div>
+            <p class="testimonial-text">"As an organizer, EventPulse gives me everything I need. Real-time feedback, average ratings, and a beautiful UI. Couldn't ask for more."</p>
+            <div class="testimonial-author">
+              <div class="t-avatar" style="background:linear-gradient(135deg,#06b6d4,#6366f1);">AK</div>
+              <div><div class="t-name">Arjun Kumar</div><div class="t-event">Startup Pitch Arena</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"The sign-up was lightning fast and the whole experience feels premium. My attendees actually enjoy leaving feedback now!"</p>
+            <div class="testimonial-author">
+              <div class="t-avatar" style="background:linear-gradient(135deg,#22c55e,#06b6d4);">PT</div>
+              <div><div class="t-name">Priya Thomas</div><div class="t-event">UX Design Masterclass</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Submitted feedback for the marathon. Took less than 2 minutes. Clean, fast, and I could see other reviews right away. Really well done!"</p>
+            <div class="testimonial-author">
+              <div class="t-avatar" style="background:linear-gradient(135deg,#fbbf24,#f472b6);">KJ</div>
+              <div><div class="t-name">Kevin Johnson</div><div class="t-event">City Marathon Challenge</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-controls">
+          <button class="t-btn" id="t-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <div class="t-dots" id="t-dots"></div>
+          <button class="t-btn" id="t-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-3d-section animate-in" id="cta-section">
+      <div class="cta-3d-bg" aria-hidden="true">
+        <div class="cta-orb-1"></div>
+        <div class="cta-orb-2"></div>
+      </div>
+      <div class="cta-3d-inner">
+        <div class="section-tag" style="justify-content:center;">✦ Get Started</div>
+        <h2 class="cta-3d-title">Ready to Collect<br/><span class="gradient-text">Better Feedback?</span></h2>
+        <p class="cta-3d-desc">Join EventPulse today. Create a free account and start collecting real feedback for your events.</p>
+        <div class="cta-3d-actions">
+          <a href="auth.html" class="btn-3d btn-3d-primary" id="cta-join-btn">
+            <span class="btn-3d-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+              Join Free
+            </span>
+            <span class="btn-3d-glow"></span>
+          </a>
+          <a href="view-feedback.html" class="btn-3d btn-3d-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            View All Reviews
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand-icon">
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" style="width:16px;height:16px;">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/>
+          </svg>
+        </div>
+        EventPulse
+      </div>
+      <p class="footer-copy">© 2026 EventPulse. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="view-feedback.html">Reviews</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="js/hero3d.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

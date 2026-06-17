@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analytics — EventPulse</title>
+  <meta name="description" content="View charts and analytical data of event feedback on EventPulse." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/>
+          </svg>
+        </div>
+        EventPulse
+      </a>
+      <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="view-feedback.html">Reviews</a></li>
+        <li><a href="charts.html" class="active">Analytics</a></li>
+        <li id="nav-auth-item"></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <!-- Page Hero -->
+    <section class="page-hero animate-in">
+      <h1>Event <span class="gradient-text">Analytics</span></h1>
+      <p>Analyze overall attendee sentiment, ratings distribution, and event feedback trends.</p>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="section" id="analytics-section">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px; margin-top: 2rem;">
+        <!-- Card 1: Ratings -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 2rem; border-radius: 16px; backdrop-filter: blur(16px); min-height: 360px; display: flex; flex-direction: column;">
+          <h3 style="margin-bottom: 1.5rem; font-family: 'Outfit', sans-serif;">Average Ratings per Event</h3>
+          <div style="flex: 1; position: relative;">
+            <canvas id="ratingsChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Card 2: Share of Reviews -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 2rem; border-radius: 16px; backdrop-filter: blur(16px); min-height: 360px; display: flex; flex-direction: column;">
+          <h3 style="margin-bottom: 1.5rem; font-family: 'Outfit', sans-serif;">Review Distribution by Event</h3>
+          <div style="flex: 1; position: relative;">
+            <canvas id="distributionChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Card 3: Timeline (Wide) -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 2rem; border-radius: 16px; backdrop-filter: blur(16px); min-height: 360px; display: flex; flex-direction: column; grid-column: span 1;">
+          <h3 style="margin-bottom: 1.5rem; font-family: 'Outfit', sans-serif;">Daily Submissions Timeline</h3>
+          <div style="flex: 1; position: relative;">
+            <canvas id="timelineChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Card 4: Rating Star Distribution -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 2rem; border-radius: 16px; backdrop-filter: blur(16px); min-height: 360px; display: flex; flex-direction: column;">
+          <h3 style="margin-bottom: 1.5rem; font-family: 'Outfit', sans-serif;">Rating Score Distribution</h3>
+          <div style="flex: 1; position: relative;">
+            <canvas id="scoreChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand-icon">
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/>
+          </svg>
+        </div>
+        EventPulse
+      </div>
+      <p class="footer-copy">© 2026 EventPulse. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="view-feedback.html">Reviews</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Event names helper matching main.js
+    const EVENT_MAP = {
+      'tech-summit': 'Tech Innovation Summit',
+      'music-fest': 'Neon Nights Music Fest',
+      'ux-masterclass': 'UX Design Masterclass',
+      'startup-arena': 'Startup Pitch Arena',
+      'art-exhibition': 'Modern Art Exhibition',
+      'marathon': 'City Marathon Challenge',
+      'food-wine': 'Global Food & Wine Fest',
+      'ai-robotics': 'AI & Robotics Expo',
+      'climate-summit': 'Climate Action Summit',
+      'blockchain-conf': 'Blockchain & Web3 Conf',
+      'wellness-retreat': 'Corporate Wellness Retreat',
+      'photography-workshop': 'Photography Masterclass'
+    };
+
+    function translateEvent(slug) {
+      return EVENT_MAP[slug] || slug;
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Helper to detect current theme style variables
+      const isLightTheme = () => document.documentElement.getAttribute('data-theme') === 'light';
+      
+      const getChartColors = () => {
+        const light = isLightTheme();
+        return {
+          text: light ? '#475569' : '#94a3b8',
+          grid: light ? 'rgba(15, 23, 42, 0.05)' : 'rgba(255, 255, 255, 0.05)'
+        };
+      };
+
+      let colors = getChartColors();
+
+      // Listen for theme toggles to redraw charts with correct label colors
+      const observer = new MutationObserver(() => {
+        colors = getChartColors();
+        [chart1, chart2, chart3, chart4].forEach(c => {
+          if (c) {
+            c.options.plugins.legend.labels.color = colors.text;
+            if (c.options.scales) {
+              if (c.options.scales.x) {
+                c.options.scales.x.ticks.color = colors.text;
+                c.options.scales.x.grid.color = colors.grid;
+              }
+              if (c.options.scales.y) {
+                c.options.scales.y.ticks.color = colors.text;
+                c.options.scales.y.grid.color = colors.grid;
+              }
+            }
+            c.update();
+          }
+        });
+      });
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+      let chart1, chart2, chart3, chart4;
+
+      try {
+        // Fetch chart datasets
+        const [ratingsRes, timelineRes, scoreRes] = await Promise.all([
+          fetch('/api/charts/ratings').then(r => r.json()),
+          fetch('/api/charts/timeline').then(r => r.json()),
+          fetch('/api/charts/rating-distribution').then(r => r.json())
+        ]);
+
+        if (ratingsRes.success) {
+          const raw = ratingsRes.data;
+          const labels = raw.map(item => translateEvent(item.event));
+          const ratings = raw.map(item => parseFloat(item.avg.toFixed(1)));
+          const counts = raw.map(item => item.count);
+
+          // 1. Avg Ratings (Horizontal Bar)
+          const ctx1 = document.getElementById('ratingsChart').getContext('2d');
+          chart1 = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+              labels,
+              datasets: [{
+                label: 'Avg Rating',
+                data: ratings,
+                backgroundColor: 'rgba(99, 102, 241, 0.75)',
+                borderColor: 'rgba(99, 102, 241, 1)',
+                borderWidth: 1.5,
+                borderRadius: 6
+              }]
+            },
+            options: {
+              indexAxis: 'y',
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                x: {
+                  min: 0, max: 5,
+                  ticks: { color: colors.text },
+                  grid: { color: colors.grid }
+                },
+                y: {
+                  ticks: { color: colors.text },
+                  grid: { display: false }
+                }
+              },
+              plugins: {
+                legend: { display: false }
+              }
+            }
+          });
+
+          // 2. Shares (Doughnut)
+          const ctx2 = document.getElementById('distributionChart').getContext('2d');
+          chart2 = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+              labels,
+              datasets: [{
+                data: counts,
+                backgroundColor: [
+                  'rgba(99, 102, 241, 0.7)',
+                  'rgba(139, 92, 246, 0.7)',
+                  'rgba(244, 114, 182, 0.7)',
+                  'rgba(6, 182, 212, 0.7)',
+                  'rgba(251, 146, 60, 0.7)',
+                  'rgba(34, 197, 94, 0.7)',
+                  'rgba(167, 139, 250, 0.7)'
+                ],
+                borderWidth: 0
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  position: 'right',
+                  labels: { color: colors.text, font: { size: 10 } }
+                }
+              }
+            }
+          });
+        }
+
+        // 3. Daily Timeline (Line)
+        if (timelineRes.success) {
+          const raw = timelineRes.data;
+          const labels = raw.map(item => item.date);
+          const counts = raw.map(item => item.count);
+
+          const ctx3 = document.getElementById('timelineChart').getContext('2d');
+          chart3 = new Chart(ctx3, {
+            type: 'line',
+            data: {
+              labels,
+              datasets: [{
+                label: 'Feedback Submissions',
+                data: counts,
+                fill: true,
+                backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                borderColor: 'rgba(6, 182, 212, 1)',
+                borderWidth: 2,
+                tension: 0.35,
+                pointBackgroundColor: 'rgba(6, 182, 212, 1)'
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                x: {
+                  ticks: { color: colors.text },
+                  grid: { color: colors.grid }
+                },
+                y: {
+                  beginAtZero: true,
+                  ticks: { stepSize: 1, color: colors.text },
+                  grid: { color: colors.grid }
+                }
+              },
+              plugins: {
+                legend: { display: false }
+              }
+            }
+          });
+        }
+
+        // 4. Rating distribution (Bar)
+        if (scoreRes.success) {
+          const raw = scoreRes.data;
+          const countMap = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+          raw.forEach(item => { countMap[item.rating] = item.count; });
+
+          const labels = ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'];
+          const data = [countMap[1], countMap[2], countMap[3], countMap[4], countMap[5]];
+
+          const ctx4 = document.getElementById('scoreChart').getContext('2d');
+          chart4 = new Chart(ctx4, {
+            type: 'bar',
+            data: {
+              labels,
+              datasets: [{
+                data,
+                backgroundColor: [
+                  'rgba(239, 68, 68, 0.7)',
+                  'rgba(245, 158, 11, 0.7)',
+                  'rgba(251, 191, 36, 0.7)',
+                  'rgba(16, 185, 129, 0.7)',
+                  'rgba(34, 197, 94, 0.7)'
+                ],
+                borderRadius: 4
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                x: {
+                  ticks: { color: colors.text },
+                  grid: { display: false }
+                },
+                y: {
+                  beginAtZero: true,
+                  ticks: { stepSize: 1, color: colors.text },
+                  grid: { color: colors.grid }
+                }
+              },
+              plugins: {
+                legend: { display: false }
+              }
+            }
+          });
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

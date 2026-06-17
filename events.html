@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events — EventPulse</title>
+  <meta name="description" content="Browse upcoming and past events. Select an event to submit your valuable feedback." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/>
+          </svg>
+        </div>
+        EventPulse
+      </a>
+      <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="events.html" class="active">Events</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        Discover Events
+      </div>
+      <h1>Explore <span class="gradient-text">Our Events</span></h1>
+      <p>Browse upcoming and past events. Your feedback makes each one better than the last.</p>
+    </section>
+
+    <!-- Events Grid -->
+    <section class="section" id="events-list">
+      <div class="events-grid stagger-children">
+
+         <!-- Event 1 -->
+         <div class="event-card animate-in">
+           <img
+             src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=400&fit=crop"
+             alt="Tech Innovation Summit stage with audience"
+             class="event-card-image"
+             loading="lazy"
+           />
+           <div class="event-card-body">
+             <div class="event-meta">
+               <span class="event-tag tech">Tech</span>
+               <span class="event-date"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> May 15, 2026</span>
+               <span class="event-location"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> San Francisco</span>
+             </div>
+             <h3>Tech Innovation Summit 2026</h3>
+             <p>Explore breakthroughs in AI, cloud computing, and next-gen software development with top industry leaders.</p>
+             <div class="event-card-footer">
+               <div class="event-attendees">
+                 <div class="attendee-avatars">
+                   <span>JD</span><span>AK</span><span>MR</span>
+                 </div>
+                 +342 attending
+               </div>
+               <a href="feedback.html" class="btn btn-primary btn-sm">Give Feedback</a>
+             </div>
+           </div>
+         </div>
+
+         <!-- Event 2 -->
+         <div class="event-card animate-in">
+           <img
+             src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&h=400&fit=crop"
+             alt="Live music performance at night"
+             class="event-card-image"
+             loading="lazy"
+           />
+           <div class="event-card-body">
+             <div class="event-meta">
+               <span class="event-tag music">Music</span>
+               <span class="event-date"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Jun 02, 2026</span>
+               <span class="event-location"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Austin, TX</span>
+             </div>
+             <h3>Neon Nights Music Festival</h3>
+             <p>Three days of electrifying live performances across five stages featuring over 80 international artists.</p>
+             <div class="event-card-footer">
+               <div class="event-attendees">
+                 <div class="attendee-avatars">
+                   <span>LS</span><span>BT</span><span>NK</span>
+                 </div>
+                 +1,280 attending
+               </div>
+               <a href="feedback.html" class="btn btn-primary btn-sm">Give Feedback</a>
+             </div>
+           </div>
+         </div>
+
+         <!-- Event 3 -->
+         <div class="event-card animate-in">
+           <img
+             src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=600&h=400&fit=crop"
+             alt="Design workshop with participants collaborating"
+             class="event-card-image"
+             loading="lazy"
+           />
+           <div class="event-card-body">
+             <div class="event-meta">
+               <span class="event-tag workshop">Workshop</span>
+               <span class="event-date"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> May 18, 2026</span>
+               <span class="event-location"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> New York</span>
+             </div>
+             <h3>UX Design Masterclass</h3>
+             <p>Hands-on workshop covering user research, prototyping, and interaction design with industry professionals.</p>
+             <div class="event-card-footer">
+               <div class="event-attendees">
+                 <div class="attendee-avatars">
+                   <span>PT</span><span>EM</span><span>YZ</span>
+                 </div>
+                 +85 attending
+               </div>
+               <a href="feedback.html" class="btn btn-primary btn-sm">Give Feedback</a>
+             </div>
+           </div>
+         </div>
+
+         <!-- Event 4 -->
+         <div class="event-card animate-in">
+           <img
+             src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=600&h=400&fit=crop"
+             alt="Startup pitch competition on stage"
+             class="event-card-image"
+             loading="lazy"
+           />
+           <div class="event-card-body">
+             <div class="event-meta">
+               <span class="event-tag business">Business</span>
+               <span class="event-date"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Apr 05, 2026</span>
+               <span class="event-location"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Chicago</span>
+             </div>
+             <h3>Startup Pitch Arena</h3>
+             <p>Watch 50 startups compete for funding in a thrilling pitch competition judged by top venture capitalists.</p>
+             <div class="event-card-footer">
+               <div class="event-attendees">
+                 <div class="attendee-avatars">
+                   <span>RG</span><span>SW</span><span>CL</span>
+                 </div>
+                 +520 attending
+               </div>
+               <a href="feedback.html" class="btn btn-primary btn-sm">Give Feedback</a>
+             </div>
+           </div>
+         </div>
+
+         <!-- Event 5 -->
+         <div class="event-card animate-in">
+           <img
+             src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=600&h=400&fit=crop"
+             alt="Art exhibition gallery with modern installations"
+             class="event-card-image"
+             loading="lazy"
+           />
+           <div class="event-card-body">
+             <div class="event-meta">
+               <span class="event-tag art">Art</span>
+               <span class="event-date"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Mar 22, 2026</span>
+               <span class="event-location"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Los Angeles</span>
+             </div>
+             <h3>Modern Art Exhibition</h3>
+             <p>Immerse yourself in stunning contemporary art installations from emerging and established artists worldwide.</p>
+             <div class="event-card-footer">
+               <div class="event-attendees">
+                 <div class="attendee-avatars">
+                   <span>AV</span><span>DQ</span><span>WP</span>
+                 </div>
+                 +210 attending
+               </div>
+               <a href="feedback.html" class="btn btn-primary btn-sm">Give Feedback</a>
+             </div>
+           </div>
+         </div>
+
+         <!-- Event 6 -->
+         <div class="event-card animate-in">
+           <img
+             src="https://images.unsplash.com/photo-1502224562085-639556652f33?w=600&h=400&fit=crop"
+             alt="Marathon runners at sunrise"
+             class="event-card-image"
+             loading="lazy"
+           />
+           <div class="event-card-body">
+             <div class="event-meta">
+               <span class="event-tag sports">Sports</span>
+               <span class="event-date"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> May 10, 2026</span>
+               <span class="event-location"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Boston</span>
+             </div>
+             <h3>City Marathon Challenge</h3>
+             <p>Join thousands of runners in a scenic 42K marathon through the historic streets with live entertainment stops.</p>
+             <div class="event-card-footer">
+               <div class="event-attendees">
+                 <div class="attendee-avatars">
+                   <span>KJ</span><span>TM</span><span>HL</span>
+                 </div>
+                 +4,100 attending
+               </div>
+               <a href="feedback.html" class="btn btn-primary btn-sm">Give Feedback</a>
+             </div>
+           </div>
+         </div>
+
+         <!-- Event 7 -->
+         <div class="event-card animate-in">
+           <img
+             src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop"
+             alt="Outdoor dining table with wine and food"
+             class="event-card-image"
+             loading="lazy"
+           />
+           <div class="event-card-body">
+             <div class="event-meta">
+               <span class="event-tag art" style="background:rgba(239, 68, 68, 0.15);color:#ef4444;">Food</span>
+               <span class="event-date"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> May 28, 2026</span>
+               <span class="event-location"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Napa Valley</span>
+             </div>
+             <h3>Global Food & Wine Festival</h3>
+             <p>Celebrate culinary excellence featuring top gourmet chefs, premium wine tasting panels, and live kitchen expos.</p>
+             <div class="event-card-footer">
+               <div class="event-attendees">
+                 <div class="attendee-avatars">
+                   <span>CH</span><span>FB</span><span>SM</span>
+                 </div>
+                 +840 attending
+               </div>
+               <a href="feedback.html" class="btn btn-primary btn-sm">Give Feedback</a>
+             </div>
+           </div>
+         </div>
+
+         <!-- Event 8 -->
+         <div class="event-card animate-in">
+           <img
+             src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop"
+             alt="Humanoid robot interacting with visitors"
+             class="event-card-image"
+             loading="lazy"
+           />
+           <div class="event-card-body">
+             <div class="event-meta">
+               <span class="event-tag tech">AI</span>
+               <span class="event-date"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Jun 12, 2026</span>
+               <span class="event-location"><svg class="btn-icon" viewBox="0 0 24 24" style="width:12px;height:12px;margin-right:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Boston</span>
+             </div>
+             <h3>AI & Robotics Expo</h3>
+             <p>Dive into next-generation robotics, automated vehicle systems, and interactive artificial intelligence exhibitions.</p>
+             <div class="event-card-footer">
+               <div class="event-attendees">
+                 <div class="attendee-avatars">
+                   <span>RB</span><span>TX</span><span>MK</span>
+                 </div>
+                 +950 attending
+               </div>
+               <a href="feedback.html" class="btn btn-primary btn-sm">Give Feedback</a>
+             </div>
+           </div>
+         </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand-icon">
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/>
+          </svg>
+        </div>
+        EventPulse
+      </div>
+      <p class="footer-copy">© 2026 EventPulse. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

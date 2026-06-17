@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit Feedback — EventPulse</title>
+  <meta name="description" content="Share your event experience. Submit feedback to help organizers improve future events." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-icon">
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/>
+          </svg>
+        </div>
+        EventPulse
+      </a>
+      <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="feedback.html" class="active">Feedback</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        Share Your Voice
+      </div>
+      <h1>Submit Your <span class="gradient-text">Feedback</span></h1>
+      <p>Help us make every event better. Your honest feedback drives real improvements.</p>
+    </section>
+
+    <!-- Feedback Section -->
+    <section class="section" id="feedback-section">
+      <div class="feedback-layout">
+
+        <!-- Left: Info Panel -->
+        <div class="feedback-info animate-in">
+          <h2>We Value Your<br /><span class="gradient-text">Experience</span></h2>
+          <p>
+            Every piece of feedback helps event organizers understand what worked well and
+            what can be improved. Your input directly shapes the quality of future events.
+          </p>
+          <ul class="info-features">
+            <li>
+              <span class="check-icon">✓</span>
+              Quick 2-minute feedback form
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              Rate with our intuitive star system
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              Share detailed thoughts and suggestions
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              Help organizers improve future events
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              Your data is stored securely
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right: Form Card -->
+        <div class="form-card animate-in">
+          <h3>Feedback Form</h3>
+          <p class="form-subtitle">Fields marked with <span style="color: var(--accent-5);">*</span> are required</p>
+
+          <form id="feedback-form" novalidate>
+
+            <!-- Name -->
+            <div class="form-group">
+              <label for="name">Full Name <span class="required">*</span></label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                placeholder="e.g. Jane Doe"
+                required
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email Address <span class="required">*</span></label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                placeholder="e.g. jane@example.com"
+                required
+              />
+            </div>
+
+            <!-- Event Select -->
+            <div class="form-group">
+              <label for="event">Select Event <span class="required">*</span></label>
+              <select id="event" name="event" class="form-control" required>
+                <option value="" disabled selected>Choose an event…</option>
+                <option value="tech-summit">Tech Innovation Summit 2026</option>
+                <option value="music-fest">Neon Nights Music Festival</option>
+                <option value="ux-masterclass">UX Design Masterclass</option>
+                <option value="startup-arena">Startup Pitch Arena</option>
+                <option value="art-exhibition">Modern Art Exhibition</option>
+                <option value="marathon">City Marathon Challenge</option>
+              </select>
+            </div>
+
+            <!-- Star Rating -->
+            <div class="form-group">
+              <label>Overall Rating <span class="required">*</span></label>
+              <div class="star-rating">
+                <input type="radio" id="star5" name="rating" value="5" />
+                <label for="star5" title="Excellent">★</label>
+                <input type="radio" id="star4" name="rating" value="4" />
+                <label for="star4" title="Very Good">★</label>
+                <input type="radio" id="star3" name="rating" value="3" />
+                <label for="star3" title="Good">★</label>
+                <input type="radio" id="star2" name="rating" value="2" />
+                <label for="star2" title="Fair">★</label>
+                <input type="radio" id="star1" name="rating" value="1" />
+                <label for="star1" title="Poor">★</label>
+              </div>
+            </div>
+
+            <!-- Feedback Message -->
+            <div class="form-group">
+              <label for="message">Your Feedback <span class="required">*</span></label>
+              <textarea
+                id="message"
+                name="message"
+                class="form-control"
+                placeholder="Tell us about your experience — what you loved, what could be better…"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+
+            <!-- Actions -->
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" id="submit-btn">
+                <svg class="btn-icon" viewBox="0 0 24 24" style="margin-right:4px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> Submit Feedback
+              </button>
+              <button type="button" class="btn btn-secondary" id="reset-btn">
+                <svg class="btn-icon" viewBox="0 0 24 24" style="margin-right:4px;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg> Reset
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand-icon">
+          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/>
+          </svg>
+        </div>
+        EventPulse
+      </div>
+      <p class="footer-copy">© 2026 EventPulse. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
