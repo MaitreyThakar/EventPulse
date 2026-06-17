@@ -1,4 +1,4 @@
-# ⚡ EventPulse — Event Feedback Management System
+#  EventPulse — Event Feedback Management System
 
 EventPulse is a premium, full-stack event intelligence and feedback management platform designed for event organizers who want to capture attendee insights, visualize metrics, and build better experiences. 
 
@@ -6,22 +6,22 @@ The application is built using a modern **Node.js + Express** backend, an **SQLi
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
-### 🎨 Frontend & Design Aesthetics
+###  Frontend & Design Aesthetics
 * **Interactive 3D Hero:** A stunning, immersive landing experience powered by **Three.js** rendering floating geometric shapes and glowing orbital rings.
 * **Dual Themes:** Clean Dark Mode and Light Mode, with theme preferences persisted in `localStorage`.
 * **Dynamic Stats Counters:** Live figures (total reviews, unique events, registered members, average rating) are fetched from the SQLite database and animated on page load using custom counter logic.
 * **Testimonials Carousel:** A smooth, interactive carousel with controls and dot indicators presenting user testimonials.
 * **Category Filtering:** Filter past events instantly by tags (Tech, Music, Design, Business, Art) with micro-animations.
 
-### 📝 Smart Feedback System
+###  Smart Feedback System
 * **Interactive Rating Selection:** A custom 5-star selector with hover animations and visual feedback.
 * **Client-Side Validation:** Detailed error handling and client-side verification before submissions.
 * **CSV Export Tool:** Download all reviews or filter by specific events and download targeted CSV sheets.
 * **Search, Sort & Filter:** Clean dashboard to search reviews by keyword, filter by rating/event, sort by date/score, with client-side pagination (10 reviews per page).
 
-### 🔒 Secure Authentication & Roles
+###  Secure Authentication & Roles
 * **JWT & Cryptography:** Secure user sessions using JSON Web Tokens and password hashing via `bcryptjs`.
 * **Email Verification:** Account verification workflow sent through **Nodemailer** integration (configured for Ethereal dev SMTP).
 * **Reset Password Flow:** Secure forgot/reset password mechanism with 1-hour link expiries.
@@ -29,7 +29,7 @@ The application is built using a modern **Node.js + Express** backend, an **SQLi
 
 ---
 
-## 🛠️ Project Structure
+##  Project Structure
 
 ```bash
 ├── css/                        # Shared stylesheets
@@ -64,7 +64,7 @@ The application is built using a modern **Node.js + Express** backend, an **SQLi
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 * [Node.js](https://nodejs.org/) (v16.0.0 or higher recommended)
@@ -112,7 +112,7 @@ EventPulse uses **Nodemailer** alongside **Ethereal Email** to simulate mail del
 
 ---
 
-## 🔐 Setting up Admin Access
+##  Setting up Admin Access
 1. Start the server.
 2. Go to **[http://localhost:3000/auth.html](http://localhost:3000/auth.html)**.
 3. Sign Up using the email **`admin@eventpulse.com`**.
@@ -154,7 +154,7 @@ EventPulse uses **Nodemailer** alongside **Ethereal Email** to simulate mail del
 
 ---
 
-## 🛡️ Technologies Used
+## Technologies Used
 * **Backend:** Node.js, Express, SQLite3 (persistent file storage)
 * **Frontend:** Vanilla HTML5, Custom CSS3, ES6 JavaScript, Three.js (3D graphics library)
 * **Authentication:** JSON Web Tokens (jsonwebtoken), bcryptjs (hashing)
