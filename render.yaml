@@ -2,7 +2,7 @@ services:
   - type: web
     name: event-pulse
     env: node
-    buildCommand: npm install
+    buildCommand: npm install && npm rebuild sqlite3 --build-from-source
     startCommand: node server.js
     plan: free
     envVars:
